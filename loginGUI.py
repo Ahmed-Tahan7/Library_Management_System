@@ -13,7 +13,7 @@ class Login(Tk):
         self.password_entry.grid(column = 1, row = 4)
 
         self.canvas = Canvas(width = 360, height = 360, bg = "light gray", highlightthickness = 0)
-        self.logo = PhotoImage(file = "Assets/file.png")
+        self.logo = PhotoImage(file = "Assets/logo.png")
         self.canvas.create_image(165, 160, image = self.logo)
         self.canvas.grid(column = 1, row = 0)
 
