@@ -1,8 +1,8 @@
 class Person:
-    def __init__(self, name, email, password):
-        self.name = name
-        self.email = email
+    def __init__(self, username, user_id, password):
+        self.username = username
+        self.user_id = user_id
         self.password = password
 
-    def authenticate(self, email, password):
-        return self.email == email and self.password == password
+    def get_info(self):
+        return f"Username: {self.username}, User ID: {self.user_id}"

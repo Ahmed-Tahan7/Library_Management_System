@@ -1,39 +1,37 @@
 from person import Person
-from book import Book
+import json
+
 class User(Person):
-
-    def __init__(self, user_id, name, email, password):
-        self.user_id = user_id
-        self.name = name
-        self.email = email
+    def __init__(self, username: str, user_id: int, password: str):
+        super().__init__(username, user_id)
         self.password = password
-        self.rented_books = []
 
-    def buy_book(self, book):
-        if book.availability:
-            print(f"{self.name} has bought '{book.title}' for ${book.price}.")
-            book.availability = False
-        else:
-            return f"{book.title} is not available for purchase"
+    def get_password(self) -> str:
+        return self.password
 
-    def rent_book(self, book):
-        if book.availability:
-            self.rent_book.append(book)
-            book.availability = False
-            return f"{self.name} has rented {book.title}"
-        else:
-            return f"{book.title} is not available"
-        
-    def get_rented_books(self):
-        if self.rented_books:
-            return [book.get_details() for book in self.rented_books]
-        return "No rented books."
-    
+    def set_password(self, new_password: str) -> None:
+        self.password = new_password
 
-    def return_book(self, book):
-        if book in self.rented_books:
-            self.rented_books.remove(book)
-            book.availability = True
-            return f"{self.name} has returned {book.title}"
-        else:
-            return f"{self.name} does not have {book.title} rented"
+    def save_to_json(self, file_path: str) -> None:
+        user_data = {
+            "username": self.username,
+            "user_id": self.user_id,
+            "password": self.password
+        }
+        with open(file_path, 'a') as json_file:
+            json.dump(user_data, json_file)
+            json_file.write('\n')
+
+    @staticmethod
+    def load_users_from_json(file_path: str) -> list:
+        users = []
+        with open(file_path, 'r') as json_file:
+            for line in json_file:
+                user_data = json.loads(line)
+                user = User(user_data['username'], user_data['user_id'], user_data['password'])
+                users.append(user)
+        return users
+
+    def __str__(self) -> str:
+        return f"User({self.username}, {self.user_id})"
+
