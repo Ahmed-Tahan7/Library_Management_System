@@ -1,3 +1,5 @@
+from userGUI import *
+from adminGUI import *
 from tkinter import *
 from tkinter import messagebox
 from adminGUI import *
