@@ -1,24 +1,31 @@
+import pandas as pd
+
 class Book:
-    
-    def __init__(self, title, author, genre, publication_year, price, availability=True, rental_price=None, rental_duration=None):
+    def __init__(self, title: str, author: str, genre: str, price: float, isbn: str):
         self.title = title
         self.author = author
         self.genre = genre
-        self.publication_year = publication_year
         self.price = price
-        self.availability = availability
-        self.rental_price = rental_price
-        self.rental_duration = rental_duration
+        self.isbn = isbn
 
-    def get_details(self):
-        return f"Title: {self.title}, Author: {self.author}, Genre: {self.genre}, Publication Year: {self.publication_year}, Price: {self.price}"
+    def save_to_csv(self, file_path: str) -> None:
+        df = pd.DataFrame({
+            "Title": [self.title],
+            "Author": [self.author],
+            "Genre": [self.genre],
+            "Price": [self.price],
+            "ISBN": [self.isbn]
+        })
+        df.to_csv(file_path, mode='a', header=False, index=False)
 
-    def update_availability(self, status):
-        self.availability = status
+    @staticmethod
+    def load_books_from_csv(file_path: str) -> list:
+        df = pd.read_csv(file_path)
+        books = []
+        for index, row in df.iterrows():
+            book = Book(row['Title'], row['Author'], row['Genre'], row['Price'], row['ISBN'])
+            books.append(book)
+        return books
 
-    def calculate_rental_cost(self):
-        if self.rental_price is not None and self.rental_duration is not None:
-            return self.rental_price * self.rental_duration
-
-    def is_available(self):
-        return self.availability
+    def __str__(self) -> str:
+        return f"Book({self.title}, {self.author}, {self.genre}, {self.price}, {self.isbn})"
