@@ -1,6 +1,5 @@
 import pandas as pd
 import json
-from book import Book
 from user import User
 
 class Library_Manager:

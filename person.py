@@ -26,5 +26,3 @@ class Person(ABC):
     
     def set_password(self, new_password):
         self.__password = new_password
-
-     
