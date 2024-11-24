@@ -2,28 +2,28 @@ from person import Person
 import json
 
 class User(Person):
-    def __init__(self, username: str, user_id: int, password: str):
-        super().__init__(username, user_id)
-        self.password = password
+    def __init__(self, username, user_id, password, cart):
+        super().__init__(username, user_id, password)
+        self.cart = cart
 
-    def get_password(self) -> str:
-        return self.password
-
-    def set_password(self, new_password: str) -> None:
-        self.password = new_password
-
-    def save_to_json(self, file_path: str) -> None:
+    def get_info(self):
+        return f"Username: {self.get_username()} | User ID: {self.get_user_id()} | Password: {self.get_password}"
+    
+    file_path = "loginDetails.json"
+    
+    def save_to_json(self, file_path):
         user_data = {
-            "username": self.username,
-            "user_id": self.user_id,
-            "password": self.password
+            "username": self.get_username(),
+            "user_id": self.get_user_id(),
+            "password": self.get_password()
         }
+
         with open(file_path, 'a') as json_file:
             json.dump(user_data, json_file)
             json_file.write('\n')
 
     @staticmethod
-    def load_users_from_json(file_path: str) -> list:
+    def load_users_from_json(file_path) -> list:
         users = []
         with open(file_path, 'r') as json_file:
             for line in json_file:
@@ -32,6 +32,6 @@ class User(Person):
                 users.append(user)
         return users
 
-    def __str__(self) -> str:
-        return f"User({self.username}, {self.user_id})"
+    def get_info(self):
+        return
 

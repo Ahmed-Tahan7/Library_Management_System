@@ -1,6 +1,7 @@
 from tkinter import *
 from tkinter import messagebox
 import json
+import string
 
 class Login_Gui(Tk):
     def __init__(self):
@@ -50,37 +51,74 @@ class Login_Gui(Tk):
         if username == "" or password == "":
             messagebox.showwarning(title = "Oops", message = "Please don't leave any fields empty!")
     
-def login_action():
-    username = username_entry.get()
-    password = password_entry.get()
-    
-    if username == "admin" and password == "password":
-        messagebox.showinfo("Login", "Login successful!")
-    else:
-        messagebox.showerror("Login", "Invalid username or password.")
+        else:
+            is_ok = messagebox.askokcancel(title = f"Signup", message = f"These are the details entered:\nusername: {username}"
+                                    f"\nPassword: {password} \nIs it okay to save?")
+            if is_ok:
+                try:
+                    with open("Login Details.json", "r") as data_file:
+                        data = json.load(data_file)
+            
+                except FileNotFoundError:
+                    with open("Login Details.json", "w") as data_file:
+                        json.dump(new_data, data_file, indent = 4)
+            
+                else:
+                    if username in data:
+                        messagebox.showwarning(title = "Oops", message = "Username already exists")
+                    else:
+                        data.update(new_data)
+                        with open("Login Details.json","w") as data_file:
+                            json.dump(data, data_file, indent = 4)
+            
+                finally:
+                    self.username_entry.delete(0, END)
+                    self.username_entry.focus()
+                    self.password_entry.delete(0, END)
 
-def signup_action():
-    messagebox.showinfo("Signup", "Signup functionality not implemented yet.")
 
-root = tk.Tk()
-root.title("Login / Signup")
-root.geometry("400x600")
+    def details_check(self):
+        username = self.username_entry.get()
+        password = self.password_entry.get()
+        try:
+            with open("Login Details.json", "r") as data_file:
+                data = json.load(data_file)
+        except FileNotFoundError:
+            messagebox.showwarning(title = "Error", message = "No Data File Found")
+        else:
+            if username in data and self.encode(password) == data[username]["password"]:
+                self.loggedin_window()
+            elif username in data and self.encode(password) != data[username]["password"]:
+                messagebox.showwarning(title = "Error", message = "Password or username is incorrect")
+            else:
+                messagebox.showwarning(title = "Error", message = "No details where found")
 
-root.configure(bg='#2c2c2c')
 
-logo_image_path = "D:\Projects\Library_Management_System\Assets\logo.png"
-logo_img = Image.open(logo_image_path).resize((150, 150))
-logo_photo = ImageTk.PhotoImage(logo_img)
+    def encode(self, password):
+        alphabet_lower = string.ascii_lowercase
+        alphabet_upper = string.ascii_uppercase  
+        shift = 5
+        end_text = ""
+        for char in password:
+            if char in alphabet_lower:
+                position = alphabet_lower.index(char)
+                new_position = (position + shift) % 26
+                end_text += alphabet_lower[new_position]
+            elif char in alphabet_upper:
+                position = alphabet_upper.index(char)
+                new_position = (position + shift) % 26
+                end_text += alphabet_upper[new_position]
+            else:
+                end_text += char
+        return end_text
 
-logo_label = tk.Label(root, image=logo_photo, bg='#2c2c2c')
-logo_label.pack(pady=40)
 
-def loggedin_window(self):
-    if self.username_entry.get()[:5] == "admin":
-        from adminGUI import Admin_Gui 
-        self.destroy()
-        admin_window = Admin_Gui()
-    else:
-        from userGUI import User_Gui
-        self.destroy()
-        user_window = User_Gui()
+    def loggedin_window(self):
+        if self.username_entry.get()[:5] == "admin":
+            from adminGUI import Admin_Gui 
+            self.destroy()
+            admin_window = Admin_Gui()
+        else:
+            from userGUI import User_Gui
+            self.destroy()
+            user_window = User_Gui()
