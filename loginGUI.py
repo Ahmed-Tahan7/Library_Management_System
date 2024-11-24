@@ -56,11 +56,11 @@ class Login_Gui(Tk):
                                     f"\nPassword: {password} \nIs it okay to save?")
             if is_ok:
                 try:
-                    with open("Login Details.json", "r") as data_file:
+                    with open("loginDetails.json", "r") as data_file:
                         data = json.load(data_file)
             
                 except FileNotFoundError:
-                    with open("Login Details.json", "w") as data_file:
+                    with open("loginDetails.json", "w") as data_file:
                         json.dump(new_data, data_file, indent = 4)
             
                 else:
@@ -68,7 +68,7 @@ class Login_Gui(Tk):
                         messagebox.showwarning(title = "Oops", message = "Username already exists")
                     else:
                         data.update(new_data)
-                        with open("Login Details.json","w") as data_file:
+                        with open("loginDetails.json","w") as data_file:
                             json.dump(data, data_file, indent = 4)
             
                 finally:
@@ -81,7 +81,7 @@ class Login_Gui(Tk):
         username = self.username_entry.get()
         password = self.password_entry.get()
         try:
-            with open("Login Details.json", "r") as data_file:
+            with open("loginDetails.json", "r") as data_file:
                 data = json.load(data_file)
         except FileNotFoundError:
             messagebox.showwarning(title = "Error", message = "No Data File Found")
