@@ -1,5 +1,3 @@
-library_system.py
-
 from backend.admin import Admin
 from backend.user import User
 import pandas as pd
