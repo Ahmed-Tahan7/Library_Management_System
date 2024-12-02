@@ -107,7 +107,7 @@ class LibrarySystem:
                 self.books_df["title"].str.contains(search_input, case=False, na=False) |
                 self.books_df["author"].str.contains(search_input, case=False, na=False) |
                 self.books_df["genre"].str.contains(search_input, case=False, na=False)
-                ]
+            ]
         elif filter_option == "title":
             return self.books_df[self.books_df["title"].str.contains(search_input, case=False, na=False)]
         elif filter_option == "author":
