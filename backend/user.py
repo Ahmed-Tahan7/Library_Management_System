@@ -23,10 +23,7 @@ class User(Person):
         if book["quantity"] >= quantity:
             self.cart[book_id] = self.cart.get(book_id, 0) + quantity
             self.library_system.books_df.at[book_index, "quantity"] -= quantity
-
-            # update the file
             self.library_system.save_books("data/books.csv")
-
             return f"Added {quantity} of '{book['title']}' to the cart"
         else:
             return f"Not enough stock available for '{book['title']}'"
