@@ -3,7 +3,7 @@ from backend.person import Person
 class User(Person):
     """
     Handle user in the Library Management System, 
-    allows him to search, filter books, and manage his cart.
+    allows him to search, filter books, and manage his cart
     """
     
     def __init__(self, username, library_system):
@@ -14,7 +14,7 @@ class User(Person):
         # Find the book by ID in the inventory
         book_row = self.library_system.books_df[self.library_system.books_df["book_id"] == book_id]
         if book_row.empty:
-            return "Book not found."
+            return "Book not found"
         
         book_index = book_row.index[0] 
         book = book_row.iloc[0]
@@ -35,12 +35,12 @@ class User(Person):
     def remove_from_cart(self, book_id):
         if book_id in self.cart:
             del self.cart[book_id]
-            return "Book removed from cart."
-        return "Book not found in cart."
+            return "Book removed from cart"
+        return "Book not found in cart"
 
     def view_cart(self):
         if not self.cart:
-            return "Your cart is empty."
+            return "Your cart is empty"
         
         cart_summary = []
         for book_id, quantity in self.cart.items():
