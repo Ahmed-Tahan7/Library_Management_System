@@ -1,5 +1,6 @@
 from backend.admin import Admin
 from backend.user import User
+from backend.cipher import Cipher
 import pandas as pd
 import json
 
@@ -13,10 +14,10 @@ class LibrarySystem:
             cls._instance = super(LibrarySystem, cls).__new__(cls)
         return cls._instance
 
-    def __init__(self, cipher):
+    def __init__(self):
         # Prevent re-initialization in Singleton
         if not hasattr(self, 'initialized'):  
-            self.cipher = cipher
+            self.cipher = Cipher()
             self.users_df = None
             self.books_df = None
             self.current_user = None
