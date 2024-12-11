@@ -1,5 +1,4 @@
 from tkinter import *
-from loginGUI import Login_Gui
 class Admin_Gui(Tk):
     def __init__(self):
         super().__init__()
@@ -15,7 +14,7 @@ class Admin_Gui(Tk):
         self.add_button = Button(text = "Add Book", bg = "#2e2e2e", fg = "white", highlightthickness = 0)
         self.inventory_button = Button(text = "Inventory", bg = "#2e2e2e", fg = "white", highlightthickness = 0)
         self.remove_button = Button(text = "Remove Book", bg = "#2e2e2e", fg = "white", highlightthickness = 0)
-        self.logout_button = Button(text = "Logout", bg = "#2e2e2e", fg = "white", highlightthickness = 0, command = self.logout)
+        self.logout_button = Button(text = "Logout", bg = "#2e2e2e", fg = "white", highlightthickness = 0, command = self.handle_logout)
         self.enter_button = Button(text = "Enter", bg = "#2e2e2e", fg = "white", highlightthickness = 0)
         
         self.add_button.place(x=110, y=425, width=100, height=30)
@@ -24,6 +23,10 @@ class Admin_Gui(Tk):
         self.logout_button.place(x=260, y=460, width=100, height=30)
         self.enter_button.place(x=350, y=380, width=100, height=30)
 
-    def logout(self):
+    def handle_logout(self):
+        from backend.library_system import LibrarySystem
+        from frontend.login_page import Login_Gui
+        self.back = LibrarySystem()
+        self.back.logout()
         self.destroy()
-        app = Login_Gui()
+        self.app = Login_Gui()
