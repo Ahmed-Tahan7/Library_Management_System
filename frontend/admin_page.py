@@ -65,17 +65,12 @@ class Admin_Gui(Tk):
         self.update_display(result)
 
     def book_details(self):
-            # Get book details from the search_entry field
             book_details = self.search_entry.get()
-            
             try:
                 details = book_details.split(",")
                 if len(details) != 6:
                     raise ValueError("Please enter the details in the correct format: Book ID, Title, Author, Price, Quantity, Genre.")
-                
                 book_id, title, author, price, quantity, genre = details[0].strip(), details[1].strip(), details[2].strip(), details[3].strip(), details[4].strip(), details[5].strip()
-
-                # Return a dictionary with book details
                 return {
                     "book_id": book_id,
                     "title": title,
@@ -88,15 +83,8 @@ class Admin_Gui(Tk):
                 self.update_display(f"Error: {str(e)}")
 
     def add_book(self):
-        # Get book details from the book_details function
         book_data = self.book_details()
-        
         if book_data:
-            # Pass the book data to the Admin class's add_book method
             result = self.admin.add_book(book_data)
-
-            # Update the display with the result message
             self.update_display(result)
-
-            # Clear the search entry after adding
             self.search_entry.delete(0, END)
