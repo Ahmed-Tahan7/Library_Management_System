@@ -8,7 +8,7 @@ class Admin(Person):
         super().__init__(username, "admin", library_system)
 
     def add_book(self, book_details):
-        # book_details (dict): A dictionary containing book information
+        # book_details: dict 
         
         book_id = book_details.get("book_id")
         if book_id in self.library_system.books_df["book_id"].values:
