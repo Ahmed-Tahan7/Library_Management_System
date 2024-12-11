@@ -22,6 +22,7 @@ class User_Gui(Tk):
         self.remove_button = Button(text = "Remove Book", bg = "#2e2e2e", fg = "white", highlightthickness = 0, command=self.remove_from_cart)
         self.logout_button = Button(text = "Logout", bg = "#2e2e2e", fg = "white", highlightthickness = 0, command=self.handle_logout)
         self.search_button = Button(text="Search", bg="#2e2e2e", fg="white", highlightthickness=0, command=self.search_books)
+        self.checkout_button = Button(text="Checkout", bg="#2e2e2e", fg="white", highlightthickness=0, command=self.checkout)
         self.filter = StringVar(self, value="Title")
         filter_options = ["Title", "Author", "Genre"]
         filter_menu = OptionMenu(self, self.filter, *filter_options)
@@ -33,6 +34,7 @@ class User_Gui(Tk):
         self.cart_button.place(x=200, y=460, width=100, height=30)
         self.logout_button.place(x=350, y=460, width=100, height=30)
         self.search_button.place(x=480, y=425, width=100, height=30)
+        self.checkout_button.place(x=480, y=460, width=100, height=30)
 
 
     def handle_logout(self):
@@ -78,3 +80,11 @@ class User_Gui(Tk):
         self.screen.delete(1.0, END)
         self.screen.insert(END, text)
         self.screen.config(state=DISABLED)
+
+    def checkout(self):
+        checkout_summary = self.user.checkout()
+        if "Your cart is empty" in checkout_summary:
+            messagebox.showwarning("Checkout", checkout_summary)
+        else:
+            self.update_display(checkout_summary)
+            messagebox.showinfo("Checkout Complete", "Thank you for your purchase!")

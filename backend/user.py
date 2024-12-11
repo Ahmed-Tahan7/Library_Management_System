@@ -60,4 +60,31 @@ class User(Person):
 
     def view_books(self):
         return self.library_system.books_df[self.library_system.books_df["quantity"] > 0]
+
+    def checkout(self):
+        if not self.cart:
+            return "Your cart is empty. Please add items before checking out."
+
+        total_price = 0
+        checkout_summary = []
+        
+        for title, quantity in self.cart.items():
+            # Normalize the title for case-insensitive and whitespace-free comparison
+            title = title.strip().lower()
+            
+            # Find the book by normalized title in the inventory
+            book_row = self.library_system.books_df[self.library_system.books_df["title"].str.strip().str.lower() == title]
+            
+            if not book_row.empty:
+                book = book_row.iloc[0]
+                book_price = book["price"] * quantity  # Assume a "price" column exists
+                total_price += book_price
+                checkout_summary.append(f"{book['title']} x{quantity} - ${book_price:.2f}")
+            else:
+                checkout_summary.append(f"Book '{title}' not found in inventory (skipped).")
+
+        # Clear the cart
+        self.cart.clear()
+
+        return f"Checkout Summary:\n" + "\n".join(checkout_summary) + f"\n\nTotal Price: ${total_price:.2f}"
     

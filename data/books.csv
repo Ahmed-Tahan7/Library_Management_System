@@ -1,6 +1,6 @@
 book_id,title,author,price,quantity,genre
 1,To Kill a Mockingbird,Harper Lee,15.99,10,Fiction
-2,1984,George Orwell,12.99,4,Dystopian
+2,1984,George Orwell,12.99,2,Dystopian
 3,The Great Gatsby,F. Scott Fitzgerald,10.99,7,Classic
 4,Pride and Prejudice,Jane Austen,9.99,3,Romance
 5,Moby-Dick,Herman Melville,11.49,2,Adventure
@@ -10,8 +10,8 @@ book_id,title,author,price,quantity,genre
 9,Crime and Punishment,Fyodor Dostoevsky,18.99,9,Thriller
 10,Brave New World,Aldous Huxley,16.99,5,Dystopian
 11,The Odyssey,Homer,17.49,3,Classic
-12,The Lord of the Rings,J.R.R. Tolkien,22.99,7,Fantasy
-13,Animal Farm,George Orwell,8.99,12,Political
+12,The Lord of the Rings,J.R.R. Tolkien,22.99,6,Fantasy
+13,Animal Farm,George Orwell,8.99,11,Political
 14,The Brothers Karamazov,Fyodor Dostoevsky,19.99,6,Philosophy
 15,The Picture of Dorian Gray,Oscar Wilde,14.49,5,Classic
 16,The Shining,Stephen King,12.49,4,Horror
