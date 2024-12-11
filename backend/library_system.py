@@ -1,7 +1,6 @@
 from backend.admin import Admin
 from backend.user import User
 from backend.cipher import Cipher
-from frontend.admin_page import Admin_Gui
 import pandas as pd
 import json
 

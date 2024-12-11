@@ -2,7 +2,6 @@ from tkinter import *
 from tkinter import messagebox
 from backend.library_system import LibrarySystem
 from backend.user import User
-import pandas as pd
 class User_Gui(Tk):
     def __init__(self):
         super().__init__()
@@ -14,7 +13,7 @@ class User_Gui(Tk):
         self.screen = Text(state = DISABLED , width = 80, height = 20, bg = "#3c3c3c", fg = "white", insertbackground = "white", font = ("Helvetica", 12))
         self.screen.grid(column = 1, row = 0)
 
-        self.search_entry = Entry(self)
+        self.search_entry = Entry(self, bg = "#3c3c3c", fg = "white", insertbackground = "white", font = ("Helvetica", 12))
         self.search_entry.place(x=160, y=380, width=300, height=30)
 
 
@@ -26,6 +25,7 @@ class User_Gui(Tk):
         self.filter = StringVar(self, value="Title")
         filter_options = ["Title", "Author", "Genre"]
         filter_menu = OptionMenu(self, self.filter, *filter_options)
+        filter_menu.config(bg="#2e2e2e", fg="white", highlightthickness=0)
         filter_menu.place(x=480, y=380, width=100, height=30)
 
         self.add_button.place(x=200, y=425, width=100, height=30)

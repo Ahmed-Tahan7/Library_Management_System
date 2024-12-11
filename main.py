@@ -1,3 +1,3 @@
-from frontend.user_page import User_Gui
-app = User_Gui()
+from frontend.login_page import Login_Gui
+app = Login_Gui()
 app.mainloop()
