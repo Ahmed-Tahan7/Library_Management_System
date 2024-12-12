@@ -11,7 +11,7 @@ book_id,title,author,price,quantity,genre
 10,Brave New World,Aldous Huxley,16.99,5,Dystopian
 11,The Odyssey,Homer,17.49,3,Classic
 12,The Lord of the Rings,J.R.R. Tolkien,22.99,6,Fantasy
-13,Animal Farm,George Orwell,8.99,11,Political
+13,Animal Farm,George Orwell,8.99,10,Political
 14,The Brothers Karamazov,Fyodor Dostoevsky,19.99,6,Philosophy
 15,The Picture of Dorian Gray,Oscar Wilde,14.49,5,Classic
 16,The Shining,Stephen King,12.49,4,Horror
@@ -48,5 +48,3 @@ book_id,title,author,price,quantity,genre
 47,The 5th Wave,Rick Yancey,13.99,5,Science Fiction
 48,The Shadow of the Wind,Carlos Ruiz Zafón,17.49,4,Mystery
 49,Big Little Lies,Liane Moriarty,15.49,7,Drama
-50,Gawad,Gawad,10.0,3,Doc
-50,Gawad,Gawad,10.0,3,Docs
