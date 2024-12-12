@@ -27,15 +27,12 @@ class Admin(Person):
         self.library_system.save_books("data/books.csv")
         return f"Book '{book_details['title']}' added successfully"
 
-    def remove_book(self, book_id):
-        if book_id not in self.library_system.books_df["book_id"].values:
-            return f"Book ID: {book_id} not found"
-    
-        self.library_system.books_df = self.library_system.books_df[
-            self.library_system.books_df["book_id"] != book_id
-        ]
-        self.library_system.save_books("data/books.csv")
-        return f"Book with ID {book_id} removed successfully"
+    def remove_book(self, title):
+            book_index = self.library_system.books_df[self.library_system.books_df['title'] == title].index
+            if book_index.empty:
+                raise ValueError("Book not found.")
+            self.library_system.books_df.drop(book_index, inplace=True)
+            return f"Book '{title}' has been successfully removed."
 
     def view_books(self):
         return self.library_system.books_df

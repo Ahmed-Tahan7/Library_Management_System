@@ -11,9 +11,12 @@ class Admin_Gui(Tk):
         self.app = LibrarySystem()
         self.admin = Admin(self.app.current_user, self.app)
         self.config(padx=110, pady=180, bg="#2e2e2e")
-        
+
+        self.title_label = Label(text="Welcome to The Whispering Pages Bookstore - Admin", bg="#2e2e2e", fg="white", highlightthickness=0, font=("Helvetica", 18))
+        self.title_label.grid(column=1, row=0)
+
         self.books_display = Text(state=DISABLED, width=105, height=20, bg="#3c3c3c", fg="white", insertbackground="white", font=("Courier", 10))
-        self.books_display.grid(column=1, row=0)
+        self.books_display.grid(column=1, row=1)
 
         self.search_entry = Entry(self, bg="#3c3c3c", fg="white", insertbackground="white", font=("Helvetica", 12))
         self.search_entry.place(x=200, y=380, width=300, height=30)
@@ -24,11 +27,11 @@ class Admin_Gui(Tk):
         self.search_button = Button(text="Search", bg="#007bff", fg="white", highlightthickness=0, command=self.search_books)
         self.logout_button = Button(text="Logout", bg="#a71e2a", fg="white", highlightthickness=0, command=self.handle_logout)
 
-        self.add_button.place(x=230, y=425, width=100, height=30)
-        self.remove_button.place(x=380, y=425, width=100, height=30)
-        self.inventory_button.place(x=230, y=460, width=100, height=30)
+        self.add_button.place(x=250, y=425, width=100, height=30)
+        self.remove_button.place(x=450, y=425, width=100, height=30)
+        self.inventory_button.place(x=250, y=460, width=100, height=30)
         self.search_button.place(x=520, y=380, width=100, height=30)
-        self.logout_button.place(x=380, y=460, width=100, height=30)
+        self.logout_button.place(x=450, y=460, width=100, height=30)
 
         self.display_books(self.app.books_df)
 
@@ -101,25 +104,27 @@ class Admin_Gui(Tk):
 
         book_title_entry = tk.Entry(dialog, bg="#3c3c3c", fg="white", font=("Helvetica", 10), width=30)
         book_title_entry.grid(row=0, column=1, padx=5, pady=5)
-        book_title = None
 
         def submit():
-            nonlocal book_title
             title = book_title_entry.get().strip()
             if not title:
                 messagebox.showerror("Input Error", "Book Title cannot be empty.")
                 return
-            book_title = title
+            try:
+                result = self.admin.remove_book(title)  # Call Admin's remove_book method
+                messagebox.showinfo("Success", result)
+                self.view_inventory()  # Refresh the book display
+            except ValueError as e:
+                messagebox.showerror("Error", str(e))
             dialog.destroy()
 
         submit_button = tk.Button(dialog, text="Submit", bg="#28a745", fg="white", command=submit)
         submit_button.grid(row=1, column=1, pady=10)
+
         dialog.transient(self)
         dialog.grab_set()
         self.wait_window(dialog)
-
-        return book_title
-
+        
     def book_details(self):
         details = {}
         dialog = tk.Toplevel(self)

@@ -11,9 +11,12 @@ class User_Gui(Tk):
         self.user = User(self.app.current_user, self.app)
         self.title("Library Management System / User")
         self.config(padx=120, pady=180, bg="#2e2e2e")
-        
+
+        self.title_label = Label(text=f"Welcome to The Whispering Pages Bookstore - {self.app.current_user.username.capitalize()}", bg="#2e2e2e", fg="white", highlightthickness=0, font=("Helvetica", 18))
+        self.title_label.grid(column=1, row=0)
+
         self.books_display = Text(state=DISABLED, width=105, height=20, bg="#3c3c3c", fg="white", insertbackground="white", font=("Helvetica", 12))
-        self.books_display.grid(column=1, row=0)
+        self.books_display.grid(column=1, row=1)
 
         self.search_entry = Entry(self, bg="#3c3c3c", fg="white", insertbackground="white", font=("Helvetica", 12))
         self.search_entry.place(x=180, y=380, width=300, height=30)
