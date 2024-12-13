@@ -28,7 +28,7 @@ class Admin(Person):
 
         self.library_system.books_df["book_id"] = self.library_system.books_df["book_id"].astype(int)
         ids = self.library_system.books_df["book_id"].tolist()
-        insert_pos = self.book_insertion(ids, book_id)
+        insert_pos = self.binary_search(ids, book_id)
 
         self.library_system.books_df = pd.concat([
             self.library_system.books_df.iloc[:insert_pos],
@@ -38,7 +38,7 @@ class Admin(Person):
         self.library_system.save_books("data/books.csv")
         return f"Book '{book_details['title']}' added successfully"
 
-    def book_insertion(self, ids, book_id):
+    def binary_search(self, ids, book_id):
 
         low = 0
         high = len(ids)
