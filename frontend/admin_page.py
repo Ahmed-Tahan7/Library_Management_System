@@ -27,11 +27,11 @@ class Admin_Gui(Tk):
         self.search_button = Button(text="Search", bg="#007bff", fg="white", highlightthickness=0, command=self.search_books)
         self.logout_button = Button(text="Logout", bg="#a71e2a", fg="white", highlightthickness=0, command=self.handle_logout)
 
-        self.add_button.place(x=250, y=425, width=100, height=30)
-        self.remove_button.place(x=450, y=425, width=100, height=30)
-        self.inventory_button.place(x=250, y=460, width=100, height=30)
+        self.add_button.place(x=230, y=425, width=100, height=30)
+        self.inventory_button.place(x=230, y=460, width=100, height=30)
+        self.remove_button.place(x=380, y=425, width=100, height=30)
+        self.logout_button.place(x=380, y=460, width=100, height=30)
         self.search_button.place(x=520, y=380, width=100, height=30)
-        self.logout_button.place(x=450, y=460, width=100, height=30)
 
         self.display_books(self.app.books_df)
 
@@ -111,9 +111,9 @@ class Admin_Gui(Tk):
                 messagebox.showerror("Input Error", "Book Title cannot be empty.")
                 return
             try:
-                result = self.admin.remove_book(title)  # Call Admin's remove_book method
+                result = self.admin.remove_book(title)
                 messagebox.showinfo("Success", result)
-                self.view_inventory()  # Refresh the book display
+                self.view_inventory()
             except ValueError as e:
                 messagebox.showerror("Error", str(e))
             dialog.destroy()
@@ -169,9 +169,9 @@ class Admin_Gui(Tk):
 
         return details
 
-
     def add_book(self):
         book_data = self.book_details()
         if book_data:
             result = self.admin.add_book(book_data)
-            self.update_display(result)
+            messagebox.showinfo("Add Book", result)
+            self.view_inventory()

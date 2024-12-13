@@ -3,6 +3,7 @@ import tkinter as tk
 from tkinter import messagebox
 from backend.library_system import LibrarySystem
 from backend.user import User
+from backend.admin import Admin
 
 class User_Gui(Tk):
     def __init__(self):
@@ -84,7 +85,7 @@ class User_Gui(Tk):
         filter_option = self.filter.get().lower()
         results = self.app.search_books(search_term, filter_option)
         if results is None or results.empty:
-            self.update_display("No books found matching your search.")
+            self.update_display("No books found matching your search")
         else:
             self.display_books(results)
 
@@ -96,6 +97,7 @@ class User_Gui(Tk):
         title = title.strip().lower()
         result = self.user.add_to_cart(title, 1)
         messagebox.showinfo("Cart Update", result)
+        self.display_books(self.app.books_df)
 
     def get_selected_book_title(self):
         return self.search_entry.get().strip()
@@ -104,7 +106,7 @@ class User_Gui(Tk):
         title = self.get_selected_book_title()
         result = self.user.remove_from_cart(title)
         messagebox.showinfo("Cart Update", result)
-        self.view_cart()
+        self.display_books(self.app.books_df)
         
     def update_display(self, text):
         self.books_display.config(state=NORMAL)
