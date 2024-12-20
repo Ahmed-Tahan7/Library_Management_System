@@ -96,16 +96,6 @@ This project is licensed under the MIT License. See `LICENSE` for more details.
 
 ---
 
-## Contributing
-Contributions are welcome! Please fork this repository, make your changes, and submit a pull request.
-
----
-
-## Acknowledgments
-This project was developed as a learning exercise for Python application development, incorporating object-oriented programming (OOP) and design patterns.
-
----
-
 ## Contact
 For inquiries or feedback, please contact:
 - **Developer Name:** Ahmed Tahan || Abdelrahman Gawad
