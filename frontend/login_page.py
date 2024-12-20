@@ -11,7 +11,7 @@ class Login_Gui(Tk):
         self.config(padx=70, pady=70, bg="#2e2e2e")
 
         self.canvas = Canvas(width = 360, height = 360, bg="#2e2e2e", highlightthickness=0)
-        self.logo = PhotoImage(file = r"Assets\\logo.png") 
+        self.logo = PhotoImage(file = r"Assets/logo.png") 
         self.canvas.create_image(180, 180, image=self.logo)
         self.canvas.grid(column=1, row=1)
 
