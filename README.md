@@ -99,5 +99,5 @@ This project is licensed under the MIT License. See `LICENSE` for more details.
 ## Contact
 For inquiries or feedback, please contact:
 - **Developer Name:** Ahmed Tahan || Abdelrahman Gawad
-- **Email:** ahmed.tahan71@gmail.com || 
+- **Email:** ahmed.tahan71@gmail.com || abdelrahman.gawad.28@gmail.com
 
