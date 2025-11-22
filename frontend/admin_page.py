@@ -8,6 +8,16 @@ class Admin_Gui(Tk):
     def __init__(self):
         super().__init__()
         self.title("Library Management System / Admin")
+        
+        # Center window on screen
+        window_width = 1200
+        window_height = 700
+        screen_width = self.winfo_screenwidth()
+        screen_height = self.winfo_screenheight()
+        x = (screen_width - window_width) // 2
+        y = (screen_height - window_height) // 2
+        self.geometry(f"{window_width}x{window_height}+{x}+{y}")
+        self.resizable(False, False)
         self.app = LibrarySystem()
         self.admin = Admin(self.app.current_user, self.app)
         self.config(padx=110, pady=180, bg="#2e2e2e")

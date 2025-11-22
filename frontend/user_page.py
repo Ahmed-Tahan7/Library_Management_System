@@ -11,6 +11,16 @@ class User_Gui(Tk):
         self.app = LibrarySystem()
         self.user = User(self.app.current_user, self.app)
         self.title("Library Management System / User")
+        
+        # Center window on screen
+        window_width = 1200
+        window_height = 700
+        screen_width = self.winfo_screenwidth()
+        screen_height = self.winfo_screenheight()
+        x = (screen_width - window_width) // 2
+        y = (screen_height - window_height) // 2
+        self.geometry(f"{window_width}x{window_height}+{x}+{y}")
+        self.resizable(False, False)
         self.config(padx=120, pady=180, bg="#2e2e2e")
 
         self.title_label = Label(text=f"Welcome to The Whispering Pages Bookstore - {self.app.current_user.username.capitalize()}", bg="#2e2e2e", fg="white", highlightthickness=0, font=("Helvetica", 18))
